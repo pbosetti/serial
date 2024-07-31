@@ -25,7 +25,10 @@ endif()
 include_directories(include)
 
 ## Add serial library
-add_library(${PROJECT_NAME} ${serial_SRCS})
+add_library(${PROJECT_NAME} STATIC ${serial_SRCS})
+if(UNIX)
+target_compile_options(${PROJECT_NAME} PRIVATE -fPIC)
+endif()
 
 ## Uncomment for example
 add_executable(serial_example examples/serial_example.cc)
